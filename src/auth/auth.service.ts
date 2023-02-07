@@ -7,6 +7,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common/exceptions';
 import * as bcrypt from 'bcryptjs';
+import { LoginUserDto } from 'src/users/dto/login-user.dto';
 @Injectable()
 export class AuthService {
   constructor(
@@ -14,19 +15,24 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async login(dto: CreateUserDto) {
+  async login(dto: LoginUserDto) {
     const user = await this.validateUser(dto);
     return this.generateToken(user);
   }
-  private async validateUser(dto: CreateUserDto) {
+  private async validateUser(dto: LoginUserDto) {
     const user = await this.usersService.getUserByEmail(dto.email);
+    if (!user) {
+      throw new UnauthorizedException({
+        message: 'Некоректний пароль або email',
+      });
+    }
     const passwordEquals = await bcrypt.compare(dto.password, user.password);
 
     if (user && passwordEquals) {
       return user;
     }
     throw new UnauthorizedException({
-      message: 'Некоректний палорль або email',
+      message: 'Некоректний пароль або email',
     });
   }
   async registration(dto: CreateUserDto) {

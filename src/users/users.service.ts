@@ -1,10 +1,12 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { User, UserDocument } from './schemas/users.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import { CreateUserDto } from './dto/create-ures.dto';
 import { Model } from 'mongoose';
 import { UpdateRoleDto } from './dto/update-role.dto';
-
+import { UpdateUserDto } from './dto/update-user.dto';
+import * as bcrypt from 'bcryptjs';
+import { UpdateUserByAdmDto } from './dto/update-userByAdm.dto';
 @Injectable()
 export class UsersService {
   constructor(@InjectModel(User.name) private model: Model<UserDocument>) {}
@@ -24,7 +26,50 @@ export class UsersService {
   async changeRoleForUser(id: string, updRoleDto: UpdateRoleDto) {
     const user = await this.model.findByIdAndUpdate(
       { _id: id },
-      { role: updRoleDto.value },
+      { role: updRoleDto.role },
+    );
+    return user;
+  }
+
+  async changeUserByUser(id: string, updUserDto: UpdateUserDto) {
+    const user = await this.model.findById(id);
+    const passwordEquals = await bcrypt.compare(
+      updUserDto.password,
+      user.password,
+    );
+    if (!passwordEquals) {
+      throw new UnauthorizedException({
+        message: 'Некоректний пароль',
+      });
+    }
+    if (user && passwordEquals) {
+      let pass: string = '';
+      if (!updUserDto.newPassword) {
+        pass = user.password;
+      } else {
+        pass = await bcrypt.hash(updUserDto.newPassword, 5);
+      }
+
+      const updateUser = await this.model.findByIdAndUpdate(
+        { _id: id },
+        {
+          ...updUserDto,
+          password: pass,
+          role: user.role,
+        },
+      );
+      return updateUser;
+    }
+    return user;
+  }
+  async changeUserByAdmin(id: string, updUserDto: UpdateUserByAdmDto) {
+    const pass = await bcrypt.hash(updUserDto.password, 5);
+    const user = await this.model.findByIdAndUpdate(
+      { _id: id },
+      {
+        ...updUserDto,
+        password: pass,
+      },
     );
     return user;
   }

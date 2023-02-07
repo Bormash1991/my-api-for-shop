@@ -1,10 +1,12 @@
-import { Module } from '@nestjs/common';
+import { Module, UsePipes } from '@nestjs/common';
 
 import { MongooseModule } from '@nestjs/mongoose';
 import { UsersModule } from './users/users.module';
 import { ConfigModule } from '@nestjs/config';
-import { AuthController } from './auth/auth.controller';
 import { AuthModule } from './auth/auth.module';
+import { ValidationPipe } from './pipes/validation.pipe';
+import { ValidationException } from './exceptions/validation.exception';
+import { ProductsModule } from './products/products.module';
 
 @Module({
   imports: [
@@ -17,6 +19,7 @@ import { AuthModule } from './auth/auth.module';
     ),
     AuthModule,
     UsersModule,
+    ProductsModule,
   ],
   controllers: [],
   providers: [],

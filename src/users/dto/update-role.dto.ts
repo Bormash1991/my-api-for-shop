@@ -1,3 +1,8 @@
+import {
+  IsIn,
+} from 'class-validator';
+
 export class UpdateRoleDto {
-  readonly value: string;
+  @IsIn(['USER', 'ADMIN'], { message: 'must be ADMIN or USER' })
+  readonly role: 'ADMIN' | 'USER';
 }
