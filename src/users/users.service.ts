@@ -73,4 +73,8 @@ export class UsersService {
     );
     return user;
   }
+  async deleteUser(id: string) {
+    const user = await this.model.findByIdAndRemove(id);
+    return user;
+  }
 }

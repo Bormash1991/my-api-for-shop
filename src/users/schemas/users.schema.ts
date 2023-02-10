@@ -25,10 +25,10 @@ export class User {
   })
   email: string;
 
+  @Exclude()
   @Prop({
     required: true,
   })
-  @Exclude()
   password: string;
 
   @Prop({

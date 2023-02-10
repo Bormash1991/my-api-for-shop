@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { ValidationPipe } from './pipes/validation.pipe';
 import { ValidationException } from './exceptions/validation.exception';
 import { ProductsModule } from './products/products.module';
+import { OrdersModule } from './orders/orders.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { ProductsModule } from './products/products.module';
     AuthModule,
     UsersModule,
     ProductsModule,
+    OrdersModule,
   ],
   controllers: [],
   providers: [],

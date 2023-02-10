@@ -2,6 +2,7 @@ import { JwtAuthGuard } from './../auth/jwt-auth.guard';
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Patch,
@@ -54,5 +55,11 @@ export class UsersController {
   @Patch('/:id')
   updateUserByUser(@Param('id') id: string, @Body() updUserDto: UpdateUserDto) {
     return this.usersService.changeUserByUser(id, updUserDto);
+  }
+  @UseGuards(RoleAuthGuard)
+  @Role('ADMIN')
+  @Delete('/:id')
+  deleteUser(@Param('id') id: string) {
+    return this.usersService.deleteUser(id);
   }
 }
