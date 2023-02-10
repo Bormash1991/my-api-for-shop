@@ -15,8 +15,23 @@ export class ProductsService {
     @InjectModel(Product.name) private model: Model<ProductsDocument>,
   ) {}
 
-  async getAllProducts() {
-    const products = await this.model.find();
+  async getAllProducts(query: any) {
+    const page = query.page || 1,
+      limit = query.limit || 100,
+      sort = query.sort || 'createdAt',
+      filter = typeof query.filter === 'string' ? [query.filter] : query.filter;
+    const filterObj = filter.reduce((result: object, param: string) => {
+      const paramArray = param.split(':');
+      result[paramArray[0]] = { $regex: paramArray[1], $options: 'i' };
+      return result;
+    }, {});
+
+    const products = await this.model
+      .find(filterObj)
+      .limit(limit)
+      .sort(sort)
+      .skip((page - 1) * limit)
+      .exec();
     return products;
   }
   async getOneProduct(id: string) {
