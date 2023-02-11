@@ -7,6 +7,13 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.useGlobalPipes(new ValidationPipe());
+  app.enableCors({
+    allowedHeaders: '*',
+    origin: 'https://bormash1991.github.io/hys_angular',
+    credentials: true,
+    preflightContinue: false,
+    methods: ['GET', 'PUT', 'POST', 'DELETE', 'PATCH', 'OPTIONS'],
+  });
   await app.listen(PORT, () => console.log(`${PORT}`));
 }
 bootstrap();
