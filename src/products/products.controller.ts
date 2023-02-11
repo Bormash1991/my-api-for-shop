@@ -19,13 +19,14 @@ import { deleteCommentDto } from './dto/delete-comment.dto';
 import { UpdateCommentDto } from './dto/update-comment.dto';
 import { CreateProductDto } from './dto/create-produst.dto';
 import { UpdateProductDto } from './dto/update-products.dto';
+import { ListQueryParamsDto } from './dto/list-query-params.dto';
 
 @Controller('products')
 export class ProductsController {
   constructor(private productsService: ProductsService) {}
 
   @Get()
-  getAll(@Query() query: any) {
+  getAll(@Query() query: ListQueryParamsDto) {
     return this.productsService.getAllProducts(query);
   }
   @Get('/:id')
@@ -65,14 +66,4 @@ export class ProductsController {
   deleteProduct(@Param('id') id: string) {
     return this.productsService.deleteProduct(id);
   }
-  // Try to make possibility to update comment
-  // @UseGuards(JwtAuthGuard)
-  // @Patch('comment-upd/:id')
-  // updateComment(
-  //   @Param('id') id: string,
-  //   @Body() commentDto: UpdateCommentDto,
-  //   @Request() req: any,
-  // ) {
-  //   return this.productsService.deleteComment(id, commentDto, req);
-  // }
 }

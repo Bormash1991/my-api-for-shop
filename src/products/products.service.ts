@@ -8,6 +8,7 @@ import { AddCommentDto } from './dto/add-coment.dto';
 import { v4 as uuidv4 } from 'uuid';
 import { deleteCommentDto } from './dto/delete-comment.dto';
 import { UpdateCommentDto } from './dto/update-comment.dto';
+import { ListQueryParamsDto } from './dto/list-query-params.dto';
 
 @Injectable()
 export class ProductsService {
@@ -15,7 +16,7 @@ export class ProductsService {
     @InjectModel(Product.name) private model: Model<ProductsDocument>,
   ) {}
 
-  async getAllProducts(query: any) {
+  async getAllProducts(query: ListQueryParamsDto) {
     const page = query.page || 1,
       limit = query.limit || 100,
       sort = query.sort || 'createdAt',
@@ -79,24 +80,4 @@ export class ProductsService {
     const product = await this.model.findByIdAndRemove(id);
     return product;
   }
-  //   async updateComment(id: string, commentDto: UpdateCommentDto, req: any) {
-  //     const sendComments = {
-  //       text: commentDto?.text,
-  //       stars: commentDto?.stars,
-  //       username: req.user.username,
-  //       userId: req.user.id,
-  //       _id: commentDto.id,
-  //     };
-  //     const product = await this.model.findOneAndUpdate(
-  //       { 'comments._id': commentDto.id },
-  //       {
-  //         $set: {
-  //           'comments.$[element].text': sendComments.text,
-  //           'comments.$[element].stars': sendComments.stars,
-  //         },
-  //       },
-  //       { arrayFilters: [{ 'element._id': commentDto.id }], new: true },
-  //     );
-  //     return product;
-  //   }
 }

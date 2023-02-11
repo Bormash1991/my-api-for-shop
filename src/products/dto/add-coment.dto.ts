@@ -4,9 +4,7 @@ import {
   IsString,
   Length,
   IsNumber,
-  Min,
   Max,
-  IsOptional,
 } from 'class-validator';
 export class AddCommentDto {
   @Length(1, 2000, { message: 'must be from 1 to 2000 letters' })
