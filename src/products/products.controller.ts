@@ -14,10 +14,10 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
-import { Role } from 'src/auth/role-auth.decorator';
-import { RoleAuthGuard } from 'src/auth/role.guard';
+import { Role } from '../auth/role-auth.decorator';
+import { RoleAuthGuard } from '../auth/role.guard';
 import { AddCommentDto } from './dto/add-coment.dto';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { deleteCommentDto } from './dto/delete-comment.dto';
 import { UpdateCommentDto } from './dto/update-comment.dto';
 import { CreateProductDto } from './dto/create-produst.dto';

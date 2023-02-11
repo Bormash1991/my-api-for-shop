@@ -12,8 +12,8 @@ import {
 } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-ures.dto';
 import { UsersService } from './users.service';
-import { Role } from 'src/auth/role-auth.decorator';
-import { RoleAuthGuard } from 'src/auth/role.guard';
+import { Role } from '../auth/role-auth.decorator';
+import { RoleAuthGuard } from '../auth/role.guard';
 import { UpdateRoleDto } from './dto/update-role.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UpdateUserByAdmDto } from './dto/update-userByAdm.dto';

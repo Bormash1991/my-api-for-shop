@@ -10,9 +10,9 @@ import {
   Post,
 } from '@nestjs/common';
 import { OrdersService } from './orders.service';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { Role } from 'src/auth/role-auth.decorator';
-import { RoleAuthGuard } from 'src/auth/role.guard';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { Role } from '../auth/role-auth.decorator';
+import { RoleAuthGuard } from '../auth/role.guard';
 import { OrderDto } from './dto/order.dto';
 
 @Controller('orders')
