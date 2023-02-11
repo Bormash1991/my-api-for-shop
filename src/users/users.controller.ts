@@ -8,7 +8,7 @@ import {
   Patch,
   Post,
   UseGuards,
-  UsePipes,
+
 } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-ures.dto';
 import { UsersService } from './users.service';
@@ -17,7 +17,6 @@ import { RoleAuthGuard } from '../auth/role.guard';
 import { UpdateRoleDto } from './dto/update-role.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UpdateUserByAdmDto } from './dto/update-userByAdm.dto';
-import { ValidationPipe } from 'src/pipes/validation.pipe';
 @Controller('users')
 export class UsersController {
   constructor(private usersService: UsersService) {}

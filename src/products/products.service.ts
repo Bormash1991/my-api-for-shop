@@ -9,7 +9,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { deleteCommentDto } from './dto/delete-comment.dto';
 import { UpdateCommentDto } from './dto/update-comment.dto';
 import { ListQueryParamsDto } from './dto/list-query-params.dto';
-import { FilesService } from 'src/files/files.service';
+import { FilesService } from '../files/files.service';
 
 @Injectable()
 export class ProductsService {

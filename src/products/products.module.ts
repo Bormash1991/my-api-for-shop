@@ -4,7 +4,7 @@ import { ProductsService } from './products.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Product, ProductsSchema } from './schemas/products.schema';
 import { AuthModule } from '../auth/auth.module';
-import { FilesModule } from 'src/files/files.module';
+import { FilesModule } from '../files/files.module';
 
 @Module({
   controllers: [ProductsController],
