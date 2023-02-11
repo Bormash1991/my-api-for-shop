@@ -9,7 +9,7 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
   app.enableCors({
     allowedHeaders: '*',
-    origin: 'https://bormash1991.github.io/hys_angular',
+    origin: '*',
     credentials: true,
     preflightContinue: false,
     methods: ['GET', 'PUT', 'POST', 'DELETE', 'PATCH', 'OPTIONS'],
