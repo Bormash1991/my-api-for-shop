@@ -1,17 +1,14 @@
-import { Module, UsePipes } from '@nestjs/common';
-
+import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UsersModule } from './users/users.module';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
-import { ValidationPipe } from './pipes/validation.pipe';
-import { ValidationException } from './exceptions/validation.exception';
 import { ProductsModule } from './products/products.module';
 import { OrdersModule } from './orders/orders.module';
 import { FilesModule } from './files/files.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import * as path from 'path';
-
+import * as process from 'process';
 @Module({
   imports: [
     ConfigModule.forRoot({
