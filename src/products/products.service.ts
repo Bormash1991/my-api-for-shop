@@ -23,11 +23,14 @@ export class ProductsService {
       limit = query.limit || 100,
       sort = query.sort || 'createdAt',
       filter = typeof query.filter === 'string' ? [query.filter] : query.filter;
-    const filterObj = filter.reduce((result: object, param: string) => {
-      const paramArray = param.split(':');
-      result[paramArray[0]] = { $regex: paramArray[1], $options: 'i' };
-      return result;
-    }, {});
+
+    const filterObj = filter
+      ? filter.reduce((result: object, param: string) => {
+          const paramArray = param.split(':');
+          result[paramArray[0]] = { $regex: paramArray[1], $options: 'i' };
+          return result;
+        }, {})
+      : {};
 
     const products = await this.model
       .find(filterObj)
