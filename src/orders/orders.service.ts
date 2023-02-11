@@ -12,8 +12,8 @@ export class OrdersService {
     const orders = await this.model.find();
     return orders;
   }
-  async getOrderByUserId(req: any) {
-    const order = await this.model.findOne({ userId: req.user.id });
+  async getOrdersSByUserId(req: any) {
+    const order = await this.model.find({ userId: req.user.id });
     return order;
   }
   async getOrderById(id: string) {

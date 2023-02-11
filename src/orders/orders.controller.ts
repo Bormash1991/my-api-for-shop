@@ -27,8 +27,8 @@ export class OrdersController {
   }
   @UseGuards(JwtAuthGuard)
   @Get('user')
-  getOrderByUser(@Request() req: any) {
-    return this.ordersService.getOrderByUserId(req);
+  getOrdersByUser(@Request() req: any) {
+    return this.ordersService.getOrdersSByUserId(req);
   }
   @Role('ADMIN')
   @UseGuards(RoleAuthGuard)
