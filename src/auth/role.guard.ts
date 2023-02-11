@@ -1,4 +1,4 @@
-import { ROLE_KEY } from './role-auth.decorator';
+import { roleKey } from './role-auth.decorator';
 import {
   CanActivate,
   ExecutionContext,
@@ -20,7 +20,7 @@ export class RoleAuthGuard implements CanActivate {
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
     try {
-      const RequariedRole = this.reflector.getAllAndOverride(ROLE_KEY, [
+      const RequariedRole = this.reflector.getAllAndOverride(roleKey, [
         context.getHandler(),
         context.getClass(),
       ]);
