@@ -29,5 +29,7 @@ export class CreateProductDto {
   @IsDefined()
   @IsNumber({}, { message: 'must be a number ' })
   @IsNotEmpty({ message: 'must not be empty ' })
-  quantity: number;
+  readonly quantity: number;
+
+  readonly files: string;
 }

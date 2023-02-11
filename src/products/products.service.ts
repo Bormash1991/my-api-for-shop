@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Product, ProductsDocument } from './schemas/products.schema';
 import { Model } from 'mongoose';
@@ -9,11 +9,13 @@ import { v4 as uuidv4 } from 'uuid';
 import { deleteCommentDto } from './dto/delete-comment.dto';
 import { UpdateCommentDto } from './dto/update-comment.dto';
 import { ListQueryParamsDto } from './dto/list-query-params.dto';
+import { FilesService } from 'src/files/files.service';
 
 @Injectable()
 export class ProductsService {
   constructor(
     @InjectModel(Product.name) private model: Model<ProductsDocument>,
+    private filesService: FilesService,
   ) {}
 
   async getAllProducts(query: ListQueryParamsDto) {
@@ -39,9 +41,17 @@ export class ProductsService {
     const product = await this.model.findOne({ _id: id });
     return product;
   }
-  async createProduct(productDto: CreateProductDto, req: any) {
+  async createProduct(productDto: CreateProductDto, req: any, files: any) {
+    if (files.length == 0) {
+      throw new HttpException(
+        'images must be 1 or more pictures',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+    const images = await this.filesService.createFiles(files);
     const product = await this.model.create({
       ...productDto,
+      images,
       authorEmail: req.user.email,
     });
     return product;

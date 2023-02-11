@@ -34,7 +34,7 @@ export class RoleAuthGuard implements CanActivate {
       const token = authHeader.split(' ')[1];
       if (bearer !== 'Bearer' || !token) {
         throw new UnauthorizedException({
-          message: 'Користувач не авторизований',
+          message: 'Not authorized',
         });
       }
 
@@ -43,9 +43,9 @@ export class RoleAuthGuard implements CanActivate {
       if (user.role === RequariedRole) {
         return true;
       }
-      throw new HttpException('Нема доступа', HttpStatus.BAD_REQUEST);
+      throw new HttpException('No access', HttpStatus.BAD_REQUEST);
     } catch (error) {
-      throw new HttpException('Нема доступа', HttpStatus.BAD_REQUEST);
+      throw new HttpException('No access', HttpStatus.BAD_REQUEST);
     }
   }
 }

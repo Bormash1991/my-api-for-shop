@@ -22,23 +22,27 @@ interface Comment {
 })
 export class Product {
   @Prop({
-    required: true,
+    // required: true,
   })
   name: string;
   @Prop({
-    required: true,
+    // required: true,
   })
   price: number;
   @Prop({
-    required: true,
+    // required: true,
   })
   quantity: number;
   @Prop({
-    required: true,
+    // required: true,
   })
   description: string;
   @Prop()
   authorEmail: string;
+  @Prop({
+    required: true,
+  })
+  images: string[];
   @Prop({
     type: [
       {

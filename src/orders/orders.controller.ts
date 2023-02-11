@@ -7,11 +7,13 @@ import {
   Patch,
   Body,
   Delete,
+  Post,
 } from '@nestjs/common';
 import { OrdersService } from './orders.service';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { Role } from 'src/auth/role-auth.decorator';
 import { RoleAuthGuard } from 'src/auth/role.guard';
+import { OrderDto } from './dto/order.dto';
 
 @Controller('orders')
 export class OrdersController {
@@ -31,10 +33,14 @@ export class OrdersController {
   @Role('ADMIN')
   @UseGuards(RoleAuthGuard)
   @Get('/:id')
-  getOrdersByUserId(@Param('id') id: string) {
+  getOrdersById(@Param('id') id: string) {
     return this.ordersService.getOrderById(id);
   }
-
+  @UseGuards(JwtAuthGuard)
+  @Post()
+  createOrder(@Body() orderDto: OrderDto, @Request() req: any) {
+    return this.ordersService.createOrder(orderDto, req);
+  }
   @UseGuards(JwtAuthGuard)
   @Patch('/:id')
   updateByUser(
@@ -47,7 +53,7 @@ export class OrdersController {
   @Role('ADMIN')
   @UseGuards(RoleAuthGuard)
   @Patch('admin/:id')
-  updateByAdmin(@Param('id') id: string, @Body() updDto: any) {
+  updateByAdmin(@Param('id') id: string, @Body() updDto: OrderDto) {
     return this.ordersService.updateOrderByAdmin(id, updDto);
   }
   @UseGuards(JwtAuthGuard)

@@ -8,7 +8,10 @@ import {
   Post,
   Query,
   Request,
+  UploadedFile,
+  UploadedFiles,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { Role } from 'src/auth/role-auth.decorator';
@@ -20,6 +23,7 @@ import { UpdateCommentDto } from './dto/update-comment.dto';
 import { CreateProductDto } from './dto/create-produst.dto';
 import { UpdateProductDto } from './dto/update-products.dto';
 import { ListQueryParamsDto } from './dto/list-query-params.dto';
+import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 
 @Controller('products')
 export class ProductsController {
@@ -36,9 +40,15 @@ export class ProductsController {
 
   @Role('ADMIN')
   @UseGuards(RoleAuthGuard)
+  @UseInterceptors(FilesInterceptor('files'))
   @Post()
-  create(@Body() productDto: CreateProductDto, @Request() req: any) {
-    return this.productsService.createProduct(productDto, req);
+  create(
+    @Body() productDto: CreateProductDto,
+    @Request() req: any,
+    @UploadedFiles() files: any,
+  ) {
+    console.log(files);
+    return this.productsService.createProduct(productDto, req, files);
   }
   @Role('ADMIN')
   @UseGuards(RoleAuthGuard)

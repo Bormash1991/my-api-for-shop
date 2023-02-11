@@ -39,7 +39,7 @@ export class UsersService {
     );
     if (!passwordEquals) {
       throw new UnauthorizedException({
-        message: 'Некоректний пароль',
+        message: 'Incorrect password',
       });
     }
     if (user && passwordEquals) {

@@ -23,7 +23,7 @@ export class AuthService {
     const user = await this.usersService.getUserByEmail(dto.email);
     if (!user) {
       throw new UnauthorizedException({
-        message: 'Некоректний пароль або email',
+        message: 'Incorrect password or email',
       });
     }
     const passwordEquals = await bcrypt.compare(dto.password, user.password);
@@ -32,13 +32,13 @@ export class AuthService {
       return user;
     }
     throw new UnauthorizedException({
-      message: 'Некоректний пароль або email',
+      message: 'Incorrect password or email',
     });
   }
   async registration(dto: CreateUserDto) {
     const regUser = await this.usersService.getUserByEmail(dto.email);
     if (regUser) {
-      throw new HttpException('Користувач уже існує', HttpStatus.BAD_REQUEST);
+      throw new HttpException('User already exists', HttpStatus.BAD_REQUEST);
     }
     const hashPassword = await bcrypt.hash(dto.password, 5);
     const user = await this.usersService.createUser({

@@ -3,7 +3,7 @@ import { Document } from 'mongoose';
 import { v4 as uuidv4 } from 'uuid';
 export type OrdersDocument = Order & Document;
 
-interface OrderDetails {
+export interface OrderDetails {
   text: string;
   name: string;
   productId: string;
@@ -40,7 +40,10 @@ export class Order {
     required: true,
   })
   userId: string;
-
+  @Prop({
+    required: true,
+  })
+  text: string;
   @Prop({
     required: true,
     type: [

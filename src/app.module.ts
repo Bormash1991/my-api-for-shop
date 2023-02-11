@@ -8,20 +8,27 @@ import { ValidationPipe } from './pipes/validation.pipe';
 import { ValidationException } from './exceptions/validation.exception';
 import { ProductsModule } from './products/products.module';
 import { OrdersModule } from './orders/orders.module';
+import { FilesModule } from './files/files.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import * as path from 'path';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       envFilePath: '.env',
     }),
+    ServeStaticModule.forRoot({
+      rootPath: path.resolve(__dirname, 'static'),
+    }),
 
     MongooseModule.forRoot(
-      'mongodb+srv://admin:admin@cluster0.3lh9dy6.mongodb.net/shop?retryWrites=true&w=majority',
+      `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_CLUSTER}.${process.env.DB_HASH}.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`,
     ),
     AuthModule,
     UsersModule,
     ProductsModule,
     OrdersModule,
+    FilesModule,
   ],
   controllers: [],
   providers: [],
