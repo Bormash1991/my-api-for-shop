@@ -24,14 +24,16 @@ export class ListQueryParamsDto {
   @IsNotEmpty()
   @IsOptional()
   @IsNumber()
+  @Type(() => Number)
   page: number;
+  @IsOptional()
   @Min(1)
   @Max(100)
   @IsInt()
   @IsDefined()
   @IsNotEmpty()
-  @IsOptional()
   @IsNumber()
+  @Type(() => Number)
   limit: number;
   @IsDefined()
   @IsNotEmpty()

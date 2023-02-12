@@ -18,6 +18,7 @@ export class ProductsService {
   ) {}
 
   async getAllProducts(query: ListQueryParamsDto) {
+    console.log(query);
     const page = query.page || 1,
       limit = query.limit || 100,
       sort = query.sort || 'createdAt',

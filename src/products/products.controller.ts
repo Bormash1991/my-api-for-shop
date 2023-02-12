@@ -22,10 +22,6 @@ import { CreateProductDto } from './dto/create-produst.dto';
 import { UpdateProductDto } from './dto/update-products.dto';
 import { ListQueryParamsDto } from './dto/list-query-params.dto';
 import { FilesInterceptor } from '@nestjs/platform-express';
-
-import * as path from 'path';
-
-import * as fs from 'fs';
 @Controller('products')
 export class ProductsController {
   constructor(private productsService: ProductsService) {}
