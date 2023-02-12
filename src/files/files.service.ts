@@ -9,7 +9,7 @@ export class FilesService {
     const filePath = path.resolve('static');
     console.log(filePath);
     if (!fs.existsSync(filePath)) {
-      fs.mkdirSync(filePath, { recursive: true });
+      fs.mkdir(filePath, { recursive: true }, () => {});
     }
     return files.map((file) => {
       const fileName = `${uuidv4()}.${file.mimetype.split('/')[1]}`;
