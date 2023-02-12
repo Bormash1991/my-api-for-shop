@@ -1,6 +1,7 @@
 {
   "version": 2,
   "env": {},
+  "cleanUrls": true,
   "builds": [
     {
       "src": "src/main.ts",
