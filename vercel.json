@@ -8,8 +8,8 @@
       "use": "@vercel/node"
     }
   ],
-
-  "routes": [
+  "cleanUrls": true,
+  "redirects": [
     {
       "src": "/.*",
       "dest": "src/main.ts",
