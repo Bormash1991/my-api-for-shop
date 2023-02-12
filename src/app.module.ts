@@ -16,7 +16,7 @@ import { MulterModule } from '@nestjs/platform-express';
       envFilePath: '.env',
     }),
     ServeStaticModule.forRoot({
-      rootPath: path.join('dist', 'static'),
+      rootPath: path.join(__dirname, '..', 'static'),
     }),
     MongooseModule.forRoot(
       `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_CLUSTER}.${process.env.DB_HASH}.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`,
