@@ -47,7 +47,6 @@ export class ProductsController {
     @Request() req: any,
     @UploadedFiles() files: any,
   ) {
-    console.log(files);
     return this.productsService.createProduct(productDto, req, files);
   }
   @Role('ADMIN')

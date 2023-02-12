@@ -1,3 +1,4 @@
+import { Type } from 'class-transformer';
 import {
   IsDefined,
   IsNotEmpty,
@@ -22,12 +23,14 @@ export class CreateProductDto {
   @Max(999999, { message: 'must be less 999999' })
   @IsDefined()
   @IsNumber({}, { message: 'must be a number ' })
+  @Type(() => Number)
   @IsNotEmpty({ message: 'must not be empty ' })
   readonly price: number;
   @Min(1, { message: 'must be less 1' })
   @Max(2000, { message: 'must be less 2000' })
   @IsDefined()
   @IsNumber({}, { message: 'must be a number ' })
+  @Type(() => Number)
   @IsNotEmpty({ message: 'must not be empty ' })
   readonly quantity: number;
 

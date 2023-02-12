@@ -14,6 +14,6 @@ async function bootstrap() {
     preflightContinue: false,
     methods: ['GET', 'PUT', 'POST', 'DELETE', 'PATCH', 'OPTIONS'],
   });
-  await app.listen(PORT, () => console.log(`${PORT}`));
+  await app.listen(PORT);
 }
 bootstrap();
