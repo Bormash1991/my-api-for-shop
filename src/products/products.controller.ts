@@ -24,7 +24,10 @@ import { CreateProductDto } from './dto/create-produst.dto';
 import { UpdateProductDto } from './dto/update-products.dto';
 import { ListQueryParamsDto } from './dto/list-query-params.dto';
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
-import multer, { diskStorage } from 'multer';
+
+import * as path from 'path';
+import { v4 as uuidv4 } from 'uuid';
+import * as fs from 'fs';
 @Controller('products')
 export class ProductsController {
   constructor(private productsService: ProductsService) {}
@@ -47,6 +50,8 @@ export class ProductsController {
     @Request() req: any,
     @UploadedFiles() files: any,
   ) {
+    const filePath = path.join(__dirname, '..', '..', 'static');
+    fs.mkdir(filePath, { recursive: true }, () => {});
     return this.productsService.createProduct(productDto, req, files);
   }
 
