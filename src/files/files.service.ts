@@ -6,9 +6,8 @@ import * as fs from 'fs';
 export class FilesService {
   async createFiles(files: any[]) {
     // try {
-    const filePath = path.join(__dirname, '..', 'products', 'static');
+    const filePath = path.join(__dirname, '..', 'static', 'products');
     console.log(filePath);
-
     if (!fs.existsSync(filePath)) {
       fs.mkdir(filePath, { recursive: true }, () => {});
     }
