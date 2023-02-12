@@ -24,7 +24,7 @@ import { CreateProductDto } from './dto/create-produst.dto';
 import { UpdateProductDto } from './dto/update-products.dto';
 import { ListQueryParamsDto } from './dto/list-query-params.dto';
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
-
+import multer, { diskStorage } from 'multer';
 @Controller('products')
 export class ProductsController {
   constructor(private productsService: ProductsService) {}
@@ -49,6 +49,7 @@ export class ProductsController {
   ) {
     return this.productsService.createProduct(productDto, req, files);
   }
+
   @Role('ADMIN')
   @UseGuards(RoleAuthGuard)
   @Patch('/:id')

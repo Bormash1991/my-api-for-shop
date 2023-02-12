@@ -12,7 +12,7 @@ export class FilesService {
       }
       return files.map((file) => {
         const fileName = `${uuidv4()}.${file.mimetype.split('/')[1]}`;
-        fs.writeFileSync(path.join(filePath, fileName), file.buffer);
+        fs.writeFile(path.join(filePath, fileName), file.buffer, (error) => {});
         return fileName;
       });
     } catch (error) {
