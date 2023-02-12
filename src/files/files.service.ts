@@ -6,7 +6,7 @@ import * as fs from 'fs';
 export class FilesService {
   async createFiles(files: any[]) {
     // try {
-    const filePath = path.resolve(__dirname, 'static');
+    const filePath = path.resolve(__dirname, '..', 'static');
     console.log(filePath);
 
     if (!fs.existsSync(filePath)) {
