@@ -8,7 +8,6 @@ import {
   Post,
   Query,
   Request,
-  UploadedFile,
   UploadedFiles,
   UseGuards,
   UseInterceptors,
@@ -19,14 +18,13 @@ import { RoleAuthGuard } from '../auth/role.guard';
 import { AddCommentDto } from './dto/add-coment.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { deleteCommentDto } from './dto/delete-comment.dto';
-import { UpdateCommentDto } from './dto/update-comment.dto';
 import { CreateProductDto } from './dto/create-produst.dto';
 import { UpdateProductDto } from './dto/update-products.dto';
 import { ListQueryParamsDto } from './dto/list-query-params.dto';
-import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
+import { FilesInterceptor } from '@nestjs/platform-express';
 
 import * as path from 'path';
-import { v4 as uuidv4 } from 'uuid';
+
 import * as fs from 'fs';
 @Controller('products')
 export class ProductsController {
@@ -50,8 +48,6 @@ export class ProductsController {
     @Request() req: any,
     @UploadedFiles() files: any,
   ) {
-    const filePath = path.join(__dirname, '..', '..', 'static');
-    fs.mkdir(filePath, { recursive: true }, () => {});
     return this.productsService.createProduct(productDto, req, files);
   }
 

@@ -11,6 +11,7 @@ export class FilesService {
     // if (!fs.existsSync(filePath)) {
     //   fs.mkdir(filePath, { recursive: true }, () => {});
     // }
+    fs.mkdir(filePath, { recursive: true }, () => {});
     return files.map((file) => {
       const fileName = `${uuidv4()}.${file.mimetype.split('/')[1]}`;
       fs.writeFile(path.join(filePath, fileName), file.buffer, (error) => {});
