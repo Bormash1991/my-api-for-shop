@@ -59,11 +59,17 @@ export class ProductsService {
     });
     return product;
   }
-  async updateProduct(id: string, productDto: UpdateProductDto) {
+  async updateProduct(id: string, productDto: UpdateProductDto, files) {
+    const getProduct = await this.getOneProduct(id);
+    const images = [
+      ...getProduct.images,
+      await this.filesService.createFiles(files),
+    ];
     const product = await this.model.findByIdAndUpdate(
       { _id: id },
       {
         ...productDto,
+        images,
       },
     );
     return product;

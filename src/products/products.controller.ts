@@ -50,8 +50,12 @@ export class ProductsController {
   @Role('ADMIN')
   @UseGuards(RoleAuthGuard)
   @Patch('/:id')
-  update(@Param('id') id: string, @Body() productDto: UpdateProductDto) {
-    return this.productsService.updateProduct(id, productDto);
+  update(
+    @Param('id') id: string,
+    @Body() productDto: UpdateProductDto,
+    @UploadedFiles() files: any,
+  ) {
+    return this.productsService.updateProduct(id, productDto, files);
   }
   @UseGuards(JwtAuthGuard)
   @Patch('comment/:id')
