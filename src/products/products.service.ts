@@ -63,7 +63,7 @@ export class ProductsService {
     const getProduct = await this.getOneProduct(id);
     const images = [
       ...getProduct.images,
-      await this.filesService.createFiles(files),
+      ...await this.filesService.createFiles(files),
     ];
     const product = await this.model.findByIdAndUpdate(
       { _id: id },
