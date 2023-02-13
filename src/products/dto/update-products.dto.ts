@@ -1,3 +1,4 @@
+import { Type } from 'class-transformer';
 import {
   IsDefined,
   IsNotEmpty,
@@ -27,6 +28,7 @@ export class UpdateProductDto {
   @IsDefined()
   @IsNumber({}, { message: 'must be a number ' })
   @IsNotEmpty({ message: 'must not be empty ' })
+  @Type(() => Number)
   readonly price: number;
   @IsOptional()
   @Min(1, { message: 'must be less 1' })
@@ -34,5 +36,8 @@ export class UpdateProductDto {
   @IsDefined()
   @IsNumber({}, { message: 'must be a number ' })
   @IsNotEmpty({ message: 'must not be empty ' })
+  @Type(() => Number)
   quantity: number;
+  @IsOptional()
+  readonly files: string;
 }

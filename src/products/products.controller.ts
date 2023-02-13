@@ -49,6 +49,7 @@ export class ProductsController {
 
   @Role('ADMIN')
   @UseGuards(RoleAuthGuard)
+  @UseInterceptors(FilesInterceptor('files'))
   @Patch('/:id')
   update(
     @Param('id') id: string,
