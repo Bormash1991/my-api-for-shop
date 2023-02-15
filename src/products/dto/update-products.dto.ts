@@ -8,6 +8,7 @@ import {
   Min,
   Max,
   IsOptional,
+  IsArray,
 } from 'class-validator';
 export class UpdateProductDto {
   @IsOptional()
@@ -40,4 +41,7 @@ export class UpdateProductDto {
   quantity: number;
   @IsOptional()
   readonly files: string;
+  @IsOptional()
+  @Type(() => String)
+  oldImages: string;
 }

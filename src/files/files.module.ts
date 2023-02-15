@@ -1,10 +1,12 @@
-import { Module } from '@nestjs/common';
+import { Module, forwardRef } from '@nestjs/common';
 import { FilesService } from './files.service';
 import { FilesController } from './files.controller';
+import { ProductsModule } from '../products/products.module';
 
 @Module({
+  imports: [forwardRef(() => ProductsModule)],
+  controllers: [FilesController],
   providers: [FilesService],
   exports: [FilesService],
-  controllers: [FilesController],
 })
 export class FilesModule {}

@@ -5,20 +5,17 @@ import {
   HttpStatus,
   Param,
 } from '@nestjs/common';
-import { unlink } from 'fs';
-import { join } from 'path';
+import { FilesService } from './files.service';
+import { ProductsService } from 'src/products/products.service';
 
 @Controller('files')
 export class FilesController {
+  constructor(
+    private filesService: FilesService,
+  ) {}
   @Delete('/:id')
-  deleteImage(@Param('id') id: string) {
-    unlink(join(__dirname, '..', 'static', id), (err) => {
-      if (err) {
-        throw new HttpException(
-          'deletion error',
-          HttpStatus.INTERNAL_SERVER_ERROR,
-        );
-      }
-    });
+  async deleteImage(@Param('id') id: string) {
+    this.filesService.deleteImage(id);
+   
   }
 }

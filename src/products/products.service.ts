@@ -47,7 +47,7 @@ export class ProductsService {
   async createProduct(productDto: CreateProductDto, req: any, files: any) {
     if (files.length == 0) {
       throw new HttpException(
-        'images must be 1 or more pictures',
+        'must be 1 or more pictures',
         HttpStatus.BAD_REQUEST,
       );
     }
@@ -60,9 +60,14 @@ export class ProductsService {
     return product;
   }
   async updateProduct(id: string, productDto: UpdateProductDto, files: any) {
-    const getProduct = await this.getOneProduct(id);
+    if (JSON.parse(productDto.oldImages).length == 0 && files.length == 0) {
+      throw new HttpException(
+        'must be 1 or more pictures',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
     const images = [
-      ...getProduct.images,
+      ...JSON.parse(productDto.oldImages),
       ...(await this.filesService.createFiles(files)),
     ];
     const product = await this.model.findByIdAndUpdate(
