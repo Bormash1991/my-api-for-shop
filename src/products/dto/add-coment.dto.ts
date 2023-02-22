@@ -1,3 +1,4 @@
+import { Type } from 'class-transformer';
 import {
   IsDefined,
   IsNotEmpty,
@@ -16,5 +17,6 @@ export class AddCommentDto {
   @IsDefined()
   @IsNumber({}, { message: 'must be a number ' })
   @IsNotEmpty({ message: 'must not be empty ' })
+  @Type(() => Number)
   readonly stars: number;
 }

@@ -18,7 +18,6 @@ export class ProductsService {
   ) {}
 
   async getAllProducts(query: ListQueryParamsDto) {
-    console.log(query);
     const page = query.page || 1,
       limit = query.limit || 100,
       sort = query.sort || 'createdAt',
@@ -38,7 +37,7 @@ export class ProductsService {
       .sort(sort)
       .skip((page - 1) * limit)
       .exec();
-    return products;
+    return [products, (await this.model.find()).length];
   }
   async getOneProduct(id: string) {
     const product = await this.model.findOne({ _id: id });
@@ -56,6 +55,7 @@ export class ProductsService {
       ...productDto,
       images,
       authorEmail: req.user.email,
+      otherIds: JSON.parse(productDto.otherIds),
     });
     return product;
   }
@@ -75,6 +75,7 @@ export class ProductsService {
       {
         ...productDto,
         images,
+        otherIds: JSON.parse(productDto.otherIds),
       },
     );
     return product;

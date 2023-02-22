@@ -27,14 +27,13 @@ export class FilesService {
     }
   }
   async deleteImage(id: string) {
-    unlink(join(__dirname, '..', 'static', id), (err) => {
-      if (err) {
-        throw new HttpException(
-          'deletion error',
-          HttpStatus.INTERNAL_SERVER_ERROR,
-        );
-      }
-    });
-   
+    try {
+      unlink(join(__dirname, '..', 'static', id), (err) => {});
+    } catch (error) {
+      throw new HttpException(
+        'deletion error',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
   }
 }

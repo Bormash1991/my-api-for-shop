@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
+import { StringSupportOption } from 'prettier';
 import { v4 as uuidv4 } from 'uuid';
 export type ProductsDocument = Product & Document;
 interface Comment {
@@ -22,19 +23,19 @@ interface Comment {
 })
 export class Product {
   @Prop({
-    // required: true,
+    required: true,
   })
   name: string;
   @Prop({
-    // required: true,
+    required: true,
   })
   price: number;
   @Prop({
-    // required: true,
+    required: true,
   })
   quantity: number;
   @Prop({
-    // required: true,
+    required: true,
   })
   description: string;
   @Prop()
@@ -42,7 +43,23 @@ export class Product {
   @Prop({
     required: true,
   })
+  guarantee: string;
+
+  @Prop({
+    required: true,
+  })
   images: string[];
+  @Prop({
+    required: true,
+  })
+  color: string;
+  @Prop({
+    required: true,
+  })
+  cssColor: string;
+  @Prop()
+  otherIds: string[];
+
   @Prop({
     type: [
       {

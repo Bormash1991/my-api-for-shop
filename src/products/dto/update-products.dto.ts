@@ -42,6 +42,25 @@ export class UpdateProductDto {
   @IsOptional()
   readonly files: string;
   @IsOptional()
-  @Type(() => String)
-  oldImages: string;
+  @Type(() => Array<string>)
+  readonly oldImages: string;
+  @IsOptional()
+  @Length(1, 50, { message: 'must be from 1 to 2000 letters' })
+  @IsDefined()
+  @IsString({ message: 'must be a string ' })
+  @IsNotEmpty({ message: 'must not be empty ' })
+  readonly guarantee: string;
+  @IsOptional()
+  @IsDefined()
+  @IsString({ message: 'must be a string ' })
+  @IsNotEmpty({ message: 'must not be empty ' })
+  readonly color: string;
+  @IsOptional()
+  @IsDefined()
+  @IsString({ message: 'must be a string ' })
+  @IsNotEmpty({ message: 'must not be empty ' })
+  readonly cssColor: string;
+  @IsOptional()
+  @Type(() => Array<string>)
+  readonly otherIds: string;
 }

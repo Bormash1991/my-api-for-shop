@@ -7,6 +7,7 @@ import {
   IsNumber,
   Min,
   Max,
+  IsOptional,
 } from 'class-validator';
 export class CreateProductDto {
   @Length(1, 2000, { message: 'must be from 1 to 2000 letters' })
@@ -33,6 +34,21 @@ export class CreateProductDto {
   @Type(() => Number)
   @IsNotEmpty({ message: 'must not be empty ' })
   readonly quantity: number;
-
+  @Length(1, 50, { message: 'must be from 1 to 2000 letters' })
+  @IsDefined()
+  @IsString({ message: 'must be a string ' })
+  @IsNotEmpty({ message: 'must not be empty ' })
+  readonly guarantee: string;
+  @IsDefined()
+  @IsString({ message: 'must be a string ' })
+  @IsNotEmpty({ message: 'must not be empty ' })
+  readonly color: string;
+  @IsDefined()
+  @IsString({ message: 'must be a string ' })
+  @IsNotEmpty({ message: 'must not be empty ' })
+  readonly cssColor: string;
+  @IsOptional()
+  @Type(() => Array<string>)
+  readonly otherIds: string;
   readonly files: string;
 }
